@@ -9,25 +9,25 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
     <style>
+        * {
+            box-sizing: border-box;
+            overflow:hidden;
+        }
         .sidebar {
-            width: 33.3333%;
+            width: 33%;
+            max-height:98vh;
+            overflow:auto;
         }
 
         .map {
             border-left: 1px solid #fff;
             position: absolute;
             left: 33.3333%;
-            width: 66.6666%;
-            top: 0;
-            bottom: 0;
+            width: 66%;
+            top: 1vh;
+            bottom: 1vh;
         }
 
-        .pad2 {
-            padding: 20px;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
 
         /* img src https://fontawesome.com/icons/utensils?style=solid */
         .marker {

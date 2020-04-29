@@ -15,6 +15,7 @@
     <script>
         function passVariable(url, i) {
             console.log('I ->', i, url);
+            getRecipe(i);
             document.getElementById("mainMap").style.display = "none";
             document.getElementById("myRec").style.display = "block";
         }
@@ -22,6 +23,7 @@
             document.getElementById("mainMap").style.display = "block";
             document.getElementById("myRec").style.display = "none";
         }
+
     </script>
     <div id="myRec">
     <div id="recipe">
@@ -53,7 +55,7 @@
         </div>
 
         <div id='map' class='map'></div>
-        <script type="module" src="./js/main.js"></script>
+        <script type="text/javascript" src="./js/main.js"></script>
 
     </div>
 

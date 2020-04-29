@@ -37,7 +37,7 @@ var recipeList = [
 
 for (var i = 0; i < recipeList.length; i++) {
     var popup = new mapboxgl.Popup()
-        .setHTML('<h3>' + recipeList[i].country + '</h3><a   onclick="passVariable(this,'+i.toString()+')">' + recipeList[i].dish + '</a>');
+        .setHTML('<h3>' + recipeList[i].country + '</h3><a   onclick="passVariable(this,'+i+')">' + recipeList[i].dish + '</a>');
         
    // <a href="link.html" onclick="passVariable(this)">Link</a>
 
@@ -46,5 +46,36 @@ for (var i = 0; i < recipeList.length; i++) {
         .setPopup(popup)
         .addTo(map);
 }
+function getRecipe(i) {
+    console.log('I in main.js->', i);
+    var recipe = new Vue({
+        el: '#recipe',
+        data: {
+            country: recipeList[i].country,
+            dish: recipeList[i].dish,
 
+        }
+    })
 
+    var ingredients = new Vue({
+        el: '#ingredients',
+        data: {
+            items: recipeList[i].ingredients
+        }
+    })
+
+    var steps = new Vue({
+        el: '#steps',
+        data: {
+            items: recipeList[i].steps
+        }
+    })
+
+    var source = new Vue({
+        el: '#source',
+        data: {
+
+            recipe: recipeList[i].recipe
+        }
+    })
+}

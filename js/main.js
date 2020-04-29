@@ -47,6 +47,8 @@ for (var i = 0; i < recipeList.length; i++) {
         .addTo(map);
 }
 function getRecipe(i) {
+   
+
     console.log('I in main.js->', i);
     var recipe = new Vue({
         el: '#recipe',

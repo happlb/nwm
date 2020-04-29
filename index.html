@@ -8,11 +8,13 @@
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
+    <script src="./js/vue.js"></script>
     <style>
         * {
             box-sizing: border-box;
-            overflow:hidden;
+            overflow: hidden;
         }
+
         .heading {
             position: absolute;
             width: 100%;
@@ -23,8 +25,9 @@
             padding-left: 10px;
             padding-top: 15px;
             color: white;
-            font-size:1vw;
+            font-size: 1vw;
         }
+
         .map {
             border-left: 1px solid #fff;
             position: absolute;
@@ -38,180 +41,18 @@
         h3 {
             color: darkolivegreen;
         }
-      
     </style>
 </head>
 <body>
- 
-        <div class='heading'>
-            <h1>Click On An Icon To View A Recipe</h1>
-        </div>
-       
+    <div id="mainMap">
+    <div class='heading'>
+        <h1>Click On An Icon To View A Recipe</h1>
+    </div>
+
     <div id='map' class='map'></div>
-    <script>
-        mapboxgl.accessToken = 'pk.eyJ1IjoiaGFwcGxiIiwiYSI6ImNrOWtoNnJwMzA0MnAzZW5uajZhZncza2QifQ.l0fHJIJaiwamw4T6eJ9Hfw';
+    <script src="./js/main.js"></script>
+    </div>
 
-        var map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11', 
-            center: [40.52, 34.34],
-            zoom: 1.25
-        });
-
-        var recipeList = [
-            {
-                "country": "Vietnam",
-                "dish": "Authentic Pho",
-                "recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",
-                "lat": 14.0583 ,
-                "long": 108.2772
-
-            },
-            {
-                "country": "Greece",
-                "dish": "Souvlaki",
-                "recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",
-                "lat": 39.0742,
-                "long": 21.8243
-
-            }
-        ]
-
-        for (var i = 0; i < recipeList.length;i++) {
-            var popup = new mapboxgl.Popup()
-                .setHTML('<h3>' + recipeList[i].country + '</h3><a href=' + recipeList[i].recipe + '>' + recipeList[i].dish +'</a>');
-
-
-            var marker = new mapboxgl.Marker()
-                .setLngLat([recipeList[i].long, recipeList[i].lat])
-                .setPopup(popup)
-                .addTo(map);
-        }
-        
-            /*
-
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            21.8243,
-                            39.0742
-                        ]
-                    },
-                    "properties": {
-                        "Country": "Greece",
-                        "Dish": "Souvlaki",
-                        "Recipe": "https://www.allrecipes.com/recipe/14713/souvlaki/",
-
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            69.3451,
-                            30.3753
-                        ]
-                    },
-                    "properties": {
-                        "Country": "Pakistan",
-                        "Dish": "Roti",
-                        "Recipe": "https://www.allrecipes.com/recipe/105046/cucumber-raita/",
-
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            121.7740,
-                            12.8797 
-                        ]
-                    },
-                    "properties": {
-                        "Country": "Philippines",
-                        "Dish": "Chicken Adobo",
-                        "Recipe": "https://www.allrecipes.com/recipes/16519/main-dish/chicken/chicken-adobo/?internalSource=hubcard&referringContentType=Search&clickId=cardslot%201",
-
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            122.4294,
-                            37.7853
-                        ]
-                    },
-                    "properties": {
-                        "Country": "Japan",
-                        "Dish": "Shrimp Tempura",
-                        "Recipe": "https://www.allrecipes.com/recipe/26962/shrimp-tempura/?internalSource=hub%20recipe&referringContentType=Search",
-
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            78.9629,
-                            20.5937
-                        ]
-                    },
-                    "properties": {
-                        "Country": "India",
-                        "Dish": "Paneer Butter Masala",
-                        "Recipe": "https://www.allrecipes.com/recipe/232203/paneer-butter-masala/?internalSource=hub%20recipe&referringContentType=Search",
-
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            95.7129,
-                            37.0902
-                        ]
-                    },
-                    "properties": {
-                        "Country": "USA",
-                        "Dish": "Mac And Cheese",
-                        "Recipe": "https://www.allrecipes.com/recipes/509/main-dish/pasta/macaroni-and-cheese/?internalSource=hubcard&referringContentType=Search&clickId=cardslot%201",
-
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [
-                            102.5528,
-                            23.6345
-                        ]
-                    },
-                    "properties": {
-                        "Country": "Mexico",
-                        "Dish": "Enchilladas ",
-                        "Recipe": "https://www.allrecipes.com/recipe/213700/enchiladas-verdes/?internalSource=hub%20recipe&referringContentType=Search",
-
-                    }
-                }
-
-            ]
-        };
-        /*
-        
-        */
-       
-
-    
-
-    </script>
+   
 </body>
 </html>

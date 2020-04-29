@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title>Store Locator</title>
+    <title>Recipes By Country</title>
     <meta name='robots' content='noindex, nofollow'>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
@@ -13,19 +13,25 @@
             box-sizing: border-box;
             overflow:hidden;
         }
-        .sidebar {
-            width: 33%;
-            max-height:98vh;
-            overflow:auto;
+        .heading {
+            position: absolute;
+            width: 100%;
+            top: 0vh;
+            left: 0;
+            height: 15vh;
+            background-color: darkolivegreen;
+            padding-left: 10px;
+            padding-top: 15px;
+            color: white;
+            font-size:1vw;
         }
-
         .map {
             border-left: 1px solid #fff;
             position: absolute;
-            left: 33.3333%;
-            width: 66%;
-            top: 1vh;
-            bottom: 1vh;
+            width: 100%;
+            top: 15vh;
+            left: 0;
+            bottom: 0;
         }
 
 
@@ -45,12 +51,11 @@
     </style>
 </head>
 <body>
-    <div class='sidebar'>
+ 
         <div class='heading'>
-            <h1>Recipes By Country</h1>
+            <h1>Click On An Icon To View A Recipe</h1>
         </div>
-        <div id='listings' class='listings'></div>
-    </div>
+       
     <div id='map' class='map'></div>
     <script>
         mapboxgl.accessToken = 'pk.eyJ1IjoiaGFwcGxiIiwiYSI6ImNrOWtoNnJwMzA0MnAzZW5uajZhZncza2QifQ.l0fHJIJaiwamw4T6eJ9Hfw';
@@ -214,10 +219,10 @@
                     "icon-allow-overlap": true,
                 }
             });
-            buildRecipeListt(recipeList);
+           buildRecipeList(recipeList);
             
         });
-        function buildRecipeListt(data) {
+        function buildRecipeList(data) {
             data.features.forEach(function (recipeList, i) {
                 /**
                  * Create a shortcut for `store.properties`,
@@ -234,8 +239,12 @@
                 listing.className = 'item';
 
                 /* Add the link to the individual listing created above. */
-                var link = listing.appendChild(document.createElement('h3'));
+                var link = listing.appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+                link.id = "link-" + prop.id;
                 link.innerHTML = prop.Country;
+               
 
                 /* Add details to the individual listing. */
                 var details = listing.appendChild(document.createElement('div'));
@@ -243,8 +252,24 @@
 
                 var details = listing.appendChild(document.createElement('div'));
                 details.innerHTML = "<a href='" + prop.Recipe + "'>View Recipe Here</a>";
-                
+
+
+
             });
+        }
+
+       
+
+        function createPopUp(currentFeature) {
+            var popUps = document.getElementsByClassName('mapboxgl-popup');
+            /** Check if there is already a popup on the map and if so, remove it */
+            if (popUps[0]) popUps[0].remove();
+
+            var popup = new mapboxgl.Popup({ closeOnClick: false })
+                .setLngLat(currentFeature.geometry.coordinates)
+                .setHTML('<h3>Sweetgreen</h3>' +
+                    '<h4>' + currentFeature.properties.address + '</h4>')
+                .addTo(map);
         }
 
     </script>

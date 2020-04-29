@@ -38,7 +38,7 @@ var recipeList = [
 
 for (var i = 0; i < recipeList.length; i++) {
     var popup = new mapboxgl.Popup()
-        .setHTML('<h3>' + recipeList[i].country + '</h3><a href=' + recipeList[i].recipe + '>' + recipeList[i].dish + '</a>');
+        .setHTML('<h3>' + recipeList[i].country + '</h3><a href="recipe.html">' + recipeList[i].dish + '</a>');
 
 
     var marker = new mapboxgl.Marker()

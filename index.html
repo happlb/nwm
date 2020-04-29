@@ -1,32 +1,143 @@
-﻿<!doctype html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+    <meta charset='utf-8' />
+    <title>Store Locator</title>
+    <meta name='robots' content='noindex, nofollow'>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
     <style>
-        .map {
-            height: 400px;
-            width: 100%;
+        .sidebar {
+            width: 33.3333%;
         }
+
+        .map {
+            border-left: 1px solid #fff;
+            position: absolute;
+            left: 33.3333%;
+            width: 66.6666%;
+            top: 0;
+            bottom: 0;
+        }
+
+        .pad2 {
+            padding: 20px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        /* img src https://fontawesome.com/icons/utensils?style=solid */
+        .marker {
+            border: none;
+            cursor: pointer;
+            height: 56px;
+            width: 56px;
+            background-repeat: no-repeat;
+            background-image: url(utensils-solid.svg);
+            /*background-position:center;
+            background-color: #00853e;*/
+        }
+
+      
     </style>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
-    <title>OpenLayers example</title>
 </head>
 <body>
-    <h2>My Map</h2>
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-        var map = new ol.Map({
-            target: 'map',
-            layers: [
-                new ol.layer.Tile({
-                    source: new ol.source.OSM()
-                })
-            ],
-            view: new ol.View({
-                center: ol.proj.fromLonLat([37.41, 8.82]),
-                zoom: 4
-            })
+    <div class='sidebar'>
+        <div class='heading'>
+            <h1>Our locations</h1>
+        </div>
+        <div id='listings' class='listings'></div>
+    </div>
+    <div id='map' class='map'></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiaGFwcGxiIiwiYSI6ImNrOWtoNnJwMzA0MnAzZW5uajZhZncza2QifQ.l0fHJIJaiwamw4T6eJ9Hfw';
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11', 
+            center: [40.52, 34.34],
+            zoom: 1
         });
+
+        var recipeList = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            108.2772,
+                            14.0583
+                        ]
+                    },
+                    "properties": {
+                        "Country": "Vietnam",
+                        "Dish": "Pho",
+                        "Recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",
+
+                    }
+                }
+
+            ]
+        };
+        recipeList.features.forEach(function (recipeList, i) {
+            recipeList.properties.id = i;
+        });
+        map.on('load', function (e) {
+            /* Add the data to your map as a layer */
+            map.addLayer({
+                "id": "locations",
+                "type": "symbol",
+                /* Add a GeoJSON source containing place coordinates and information. */
+                "source": {
+                    "type": "geojson",
+                    "data": recipeList
+                },
+                "layout": {
+                    "icon-image": "restaurant-15",
+                    "icon-allow-overlap": true,
+                }
+            });
+            buildRecipeListt(recipeList);
+            
+        });
+        function buildRecipeListt(data) {
+            data.features.forEach(function (recipeList, i) {
+                /**
+                 * Create a shortcut for `store.properties`,
+                 * which will be used several times below.
+                **/
+                var prop = recipeList.properties;
+
+                /* Add a new listing section to the sidebar. */
+                var listings = document.getElementById('listings');
+                var listing = listings.appendChild(document.createElement('div'));
+                /* Assign a unique `id` to the listing. */
+                listing.id = "listing-" + prop.id;
+                /* Assign the `item` class to each listing for styling. */
+                listing.className = 'item';
+
+                /* Add the link to the individual listing created above. */
+                var link = listing.appendChild(document.createElement('a'));
+                link.href = '#';
+                link.className = 'title';
+                link.id = "link-" + prop.id;
+                link.innerHTML = prop.Country;
+
+                /* Add details to the individual listing. */
+                var details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = prop.Dish;
+
+                var details = listing.appendChild(document.createElement('div'));
+                details.innerHTML = "<a href='" + prop.Recipe + "'>View Recipe Here</a>";
+                
+            });
+        }
+
     </script>
 </body>
 </html>

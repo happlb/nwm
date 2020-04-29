@@ -13,11 +13,10 @@
 </head>
 <body>
     <script>
-        function passVariable(url,i) {
-            //document.cookie = "id=1";
-            //window.location/**/.href = this;
-            //console.log("here", recipeList);
-            console.log('I ->', i, url)
+        function passVariable(url, i) {
+
+            console.log('I ->', i, url);
+            document.getElementById("mainMap").style.display = "none";
         }
     </script>
     <div id="mainMap">
@@ -29,5 +28,26 @@
         <script type="module" src="./js/main.js"></script>
 
     </div>
+    <div id="recipe">
+        <div class="heading">
+            <h1> {{ country }} {{dish}} </h1>
+        </div>
+    </div>
+    <div class="miniheading">
+        <h2 id="source">Recipe Source:<a href={{recipe}}> Link</a></h2>
+    </div>
+    <div class="maincontent">
+        <ul id="ingredients">
+            <li v-for="item in items">
+                {{item}}
+            </li>
+        </ul>
+        <ol id="steps">
+            <li v-for="item in items" :key="item.message">
+                {{ item }}
+            </li>
+        </ol>
+    </div>
+    <div class="footer"></div>
 </body>
 </html>

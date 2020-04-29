@@ -36,7 +36,7 @@
             height: 56px;
             width: 56px;
             background-repeat: no-repeat;
-            background-image: url(utensils-solid.svg);
+            background-image: url(marker.png);
             /*background-position:center;
             background-color: #00853e;*/
         }
@@ -47,7 +47,7 @@
 <body>
     <div class='sidebar'>
         <div class='heading'>
-            <h1>Our locations</h1>
+            <h1>Recipes By Country</h1>
         </div>
         <div id='listings' class='listings'></div>
     </div>
@@ -76,8 +76,120 @@
                     },
                     "properties": {
                         "Country": "Vietnam",
-                        "Dish": "Pho",
+                        "Dish": "Authentic Pho",
                         "Recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            21.8243,
+                            39.0742
+                        ]
+                    },
+                    "properties": {
+                        "Country": "Greece",
+                        "Dish": "Souvlaki",
+                        "Recipe": "https://www.allrecipes.com/recipe/14713/souvlaki/",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            69.3451,
+                            30.3753
+                        ]
+                    },
+                    "properties": {
+                        "Country": "Pakistan",
+                        "Dish": "Roti",
+                        "Recipe": "https://www.allrecipes.com/recipe/105046/cucumber-raita/",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            121.7740,
+                            12.8797 
+                        ]
+                    },
+                    "properties": {
+                        "Country": "Philippines",
+                        "Dish": "Chicken Adobo",
+                        "Recipe": "https://www.allrecipes.com/recipes/16519/main-dish/chicken/chicken-adobo/?internalSource=hubcard&referringContentType=Search&clickId=cardslot%201",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            122.4294,
+                            37.7853
+                        ]
+                    },
+                    "properties": {
+                        "Country": "Japan",
+                        "Dish": "Shrimp Tempura",
+                        "Recipe": "https://www.allrecipes.com/recipe/26962/shrimp-tempura/?internalSource=hub%20recipe&referringContentType=Search",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            78.9629,
+                            20.5937
+                        ]
+                    },
+                    "properties": {
+                        "Country": "India",
+                        "Dish": "Paneer Butter Masala",
+                        "Recipe": "https://www.allrecipes.com/recipe/232203/paneer-butter-masala/?internalSource=hub%20recipe&referringContentType=Search",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            95.7129,
+                            37.0902
+                        ]
+                    },
+                    "properties": {
+                        "Country": "USA",
+                        "Dish": "Mac And Cheese",
+                        "Recipe": "https://www.allrecipes.com/recipes/509/main-dish/pasta/macaroni-and-cheese/?internalSource=hubcard&referringContentType=Search&clickId=cardslot%201",
+
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            102.5528,
+                            23.6345
+                        ]
+                    },
+                    "properties": {
+                        "Country": "Mexico",
+                        "Dish": "Enchilladas ",
+                        "Recipe": "https://www.allrecipes.com/recipe/213700/enchiladas-verdes/?internalSource=hub%20recipe&referringContentType=Search",
 
                     }
                 }
@@ -122,15 +234,12 @@
                 listing.className = 'item';
 
                 /* Add the link to the individual listing created above. */
-                var link = listing.appendChild(document.createElement('a'));
-                link.href = '#';
-                link.className = 'title';
-                link.id = "link-" + prop.id;
+                var link = listing.appendChild(document.createElement('h3'));
                 link.innerHTML = prop.Country;
 
                 /* Add details to the individual listing. */
                 var details = listing.appendChild(document.createElement('div'));
-                details.innerHTML = prop.Dish;
+                details.innerHTML = "Dish: "+ prop.Dish;
 
                 var details = listing.appendChild(document.createElement('div'));
                 details.innerHTML = "<a href='" + prop.Recipe + "'>View Recipe Here</a>";

@@ -14,26 +14,22 @@
 <body>
     <script>
         function passVariable(url, i) {
-
             console.log('I ->', i, url);
             document.getElementById("mainMap").style.display = "none";
         }
+        function hideRec() {
+            
+            document.getElementById("myRec").style.display = "none";
+        }
     </script>
-    <div id="mainMap">
-        <div class='heading'>
-            <h1>Click On An Icon To View A Recipe</h1>
-        </div>
-
-        <div id='map' class='map'></div>
-        <script type="module" src="./js/main.js"></script>
-
-    </div>
+    <div id="myRec">
     <div id="recipe">
         <div class="heading">
             <h1> {{ country }} {{dish}} </h1>
         </div>
     </div>
     <div class="miniheading">
+        <h2 id="hideRecipe">Go Back to Map:<a href="#" onclick="hideRec()"> Link</a></h2>
         <h2 id="source">Recipe Source:<a href={{recipe}}> Link</a></h2>
     </div>
     <div class="maincontent">
@@ -49,5 +45,16 @@
         </ol>
     </div>
     <div class="footer"></div>
+    </div>
+    <div id="mainMap">
+        <div class='heading'>
+            <h1>Click On An Icon To View A Recipe</h1>
+        </div>
+
+        <div id='map' class='map'></div>
+        <script type="module" src="./js/main.js"></script>
+
+    </div>
+
 </body>
 </html>

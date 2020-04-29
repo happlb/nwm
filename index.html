@@ -9,49 +9,18 @@
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.0/mapbox-gl.css' rel='stylesheet' />
     <script src="./js/vue.js"></script>
-    <style>
-        * {
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .heading {
-            position: absolute;
-            width: 100%;
-            top: 0vh;
-            left: 0;
-            height: 15vh;
-            background-color: darkolivegreen;
-            padding-left: 10px;
-            padding-top: 15px;
-            color: white;
-            font-size: 1vw;
-        }
-
-        .map {
-            border-left: 1px solid #fff;
-            position: absolute;
-            width: 100%;
-            top: 15vh;
-            left: 0;
-            bottom: 0;
-        }
-
-
-        h3 {
-            color: darkolivegreen;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="mainMap">
-    <div class='heading'>
-        <h1>Click On An Icon To View A Recipe</h1>
+        <div class='heading'>
+            <h1>Click On An Icon To View A Recipe</h1>
+        </div>
+
+        <div id='map' class='map'></div>
+        <script type="module" src="./js/main.js"></script>
     </div>
 
-    <div id='map' class='map'></div>
-    <script src="./js/main.js"></script>
-    </div>
-   
+
 </body>
 </html>

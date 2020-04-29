@@ -1,13 +1,3 @@
-var recipe = new Vue({
-    el: '#mainMap',
-    data: {
-        country: 'Vietnam',
-        dish: 'Authentic Pho',
-        recipe: 'https://www.allrecipes.com/recipe/228443/authentic-pho/'
-
-    }
-})
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFwcGxiIiwiYSI6ImNrOWtoNnJwMzA0MnAzZW5uajZhZncza2QifQ.l0fHJIJaiwamw4T6eJ9Hfw';
 
 var map = new mapboxgl.Map({
@@ -38,11 +28,12 @@ var recipeList = [
 
 for (var i = 0; i < recipeList.length; i++) {
     var popup = new mapboxgl.Popup()
-        .setHTML('<h3>' + recipeList[i].country + '</h3><a href="recipe.html">' + recipeList[i].dish + '</a>');
-
+        .setHTML('<h3>' + recipeList[i].country + '</h3><a href="recipe.html" onclick="export let shared = i;">' + recipeList[i].dish + '</a>');
+        
 
     var marker = new mapboxgl.Marker()
         .setLngLat([recipeList[i].long, recipeList[i].lat])
         .setPopup(popup)
         .addTo(map);
 }
+

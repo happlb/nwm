@@ -13,11 +13,20 @@
 </head>
 <body>
     <script>
-        function passVariable(url, i) {
-            console.log('I ->', i, url);
+        function passVariable(myurl, i) {
+            console.log('I ->', i, myurl);
             getRecipe(i);
             document.getElementById("mainMap").style.display = "none";
             document.getElementById("myRec").style.display = "block";
+
+           
+           
+
+         /*   const url = 'http://localhost:3000/tasks';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => console.log(data));*/
         }
         function hideRec() {
             location.reload();

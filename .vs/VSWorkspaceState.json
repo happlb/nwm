@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\api",
+    "\\js"
   ],
-  "SelectedNode": "\\myApi",
+  "SelectedNode": "\\api\\app.js",
   "PreviewInSolutionExplorer": false
 }

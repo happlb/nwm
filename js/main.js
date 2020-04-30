@@ -7,16 +7,41 @@ var map = new mapboxgl.Map({
     zoom: 1.25
 });
 
-var recipeList = [];
-const Http = new XMLHttpRequest();
+let request = new XMLHttpRequest();
+request.open("GET", "http://localhost:3000/tasks");
+request.setRequestHeader("Access-Control-Allow-Origin", "*");
+request.send();
+request.onload = () => {
+    console.log(request);
+    console.log("errorzzzz");
+    if (request.status == 200) {
+        console.log("idj");
+        console.log(JSON.parse(request.response));
+    } else {
+        console.log("error");
+    }}
 
-/*Http.open("GET", url);
+
+
+/*const url = 'https://localhost:3000/tasks';
+var recipeList = [];
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == XMLHttpRequest.DONE) {
+        alert(xhr.responseText);
+    }
+}
+xhr.open('GET', url, true);
+xhr.send(null);*/
+//const Http = new XMLHttpRequest();
+
+//Http.open("GET", url);
 //Http.setRequestHeader("Access-Control-Allow-Origin", "*");
-Http.send();*/
-const url = 'http://localhost:3000/tasks';
-fetch(url)
+//Http.send();
+
+/*fetch(url)
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => console.log(data));*/
    
 
 var recipeList = [{

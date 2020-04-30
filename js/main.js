@@ -9,13 +9,16 @@ var map = new mapboxgl.Map({
 
 var recipeList = [];
 const Http = new XMLHttpRequest();
-const url = 'https://localhost:3000/tasks';
-Http.open("GET", url);
-Http.setRequestHeader("Access-Control-Allow-Origin", "*");
-Http.send("recipe_id=4");
-Http.onreadystateChange = function () {
-    console.log(Http.responseText)
-}
+
+/*Http.open("GET", url);
+//Http.setRequestHeader("Access-Control-Allow-Origin", "*");
+Http.send();*/
+const url = 'http://localhost:3000/tasks';
+fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data));
+   
+
 var recipeList = [{
         "country": "Vietnam",
         "dish": "Authentic Pho",

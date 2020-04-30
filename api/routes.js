@@ -2,7 +2,9 @@
 const express = require('express')
 const router = express.Router();
 router.get('/', (req,res) => {
-    console.log('recipe id recieved :', req)
+   
+    console.log( 'req')
+   
 
     let recipe_id = req.body.recipe_id;
     if (recipe_id == 1)

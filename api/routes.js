@@ -122,5 +122,4 @@ router.get('/', (req,res) => {
             ])
 })
 
-//router.get('/tasks', () => {/* another function*/})
 module.exports = router;

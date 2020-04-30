@@ -55,6 +55,9 @@
     left: 0;
     bottom: 0;
 }
+.myRec{
+    display:none;
+}
 
 ul {
     list-style-type: disc;

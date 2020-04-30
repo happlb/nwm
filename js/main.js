@@ -8,10 +8,7 @@ function makeReq() {
     request.open("GET", "http://localhost:3000/tasks?");
     request.setRequestHeader("Content-Type", "application/json");
     request.send()  
-    /*var params = {
-        "recipe_id": 2
-    }*/
-    //request.send(JSON.stringify(params))
+ 
     request.onload = () => {
         if (request.status == 200) {
             console.log(request.response);
@@ -38,11 +35,6 @@ function genMap() {
         var popup = new mapboxgl.Popup()
             .setHTML('<h3>' + recipeList[i].country + '</h3><button  onclick="passVariable(this,' + i + ')">' + recipeList[i].dish + '</button>');
 
-       /* var marker = new mapboxgl.Marker
-            .setLngLat([30 , 30])
-            .setLngLat([recipeList[i].long , recipeList[i].lat])
-            .setPopup(popup)
-            .addTo(map);*/
         var marker = new mapboxgl.Marker()
             .setLngLat([recipeList[i].long, recipeList[i].lat])
             .setPopup(popup)

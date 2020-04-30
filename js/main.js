@@ -7,8 +7,16 @@ var map = new mapboxgl.Map({
     zoom: 1.25
 });
 
-var recipeList = [
-    {
+var recipeList = [];
+const Http = new XMLHttpRequest();
+const url = 'https://localhost:3000/tasks';
+Http.open("GET", url);
+Http.setRequestHeader("Access-Control-Allow-Origin", "*");
+Http.send("recipe_id=4");
+Http.onreadystateChange = function () {
+    console.log(Http.responseText)
+}
+var recipeList = [{
         "country": "Vietnam",
         "dish": "Authentic Pho",
         "recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",

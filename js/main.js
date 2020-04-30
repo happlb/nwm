@@ -56,12 +56,16 @@ makeReq();
 function makeReq() {
     let request = new XMLHttpRequest();
     request.open("GET", "http://localhost:3000/tasks");//
-    request.send();
+
+    //request.send([JSON.stringify({ "chet": "dave" })]);
+    request.send({
+        "CHEZ":"DAVE"
+    })    //request.send(2);
     request.onload = () => {
         console.log(request);
         console.log("errorzzzz");
         if (request.status == 200) {
-            console.log("idj");
+            console.log("idj", request.response);
             console.log(JSON.parse(request.response));
         } else {
             console.log("error");

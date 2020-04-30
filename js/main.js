@@ -3,7 +3,7 @@
     "dish": "Authentic Pho",
     "recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",
     "lat": 14.0583,
-    "long": 108.,
+    "long": 108,
     "ingredients": ['3 quarts fat - free chicken broth', '1 onion, sliced into rings', '2 tablespoons hoisin sauce',
         '1 tablespoon oyster sauce', '1 tablespoon minced garlic', '1/2 teaspoon ginger powder', '1/2 teaspoon curry powder',
         '1 pinch ground cinnamon', '1(16 ounce) package dried rice noodles', '1 roasted chicken'],
@@ -49,6 +49,14 @@
 
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFwcGxiIiwiYSI6ImNrOWtoNnJwMzA0MnAzZW5uajZhZncza2QifQ.l0fHJIJaiwamw4T6eJ9Hfw';
+/*
+var popup = new mapboxgl.Popup()
+    .setHTML('<h3>' + hardrecipeList[0].country + '</h3><button  onclick="passVariable(this,' + 0 + ')">' + hardrecipeList[0].dish + '</button>');
+
+var marker = new mapboxgl.Marker()
+    .setLngLat([-21.92661562, 64.14356426])
+    .setPopup(popup)
+    .addTo(map);*/
 
 //genMap();
 makeReq();
@@ -87,12 +95,16 @@ function genMap(recipeList) {
 
 
     for (var i = 0; i < recipeList.length; i++) {
-        console.log(recipeList[i]);
-        console.log(typeof recipeList[i].long);
+       
         var popup = new mapboxgl.Popup()
             .setHTML('<h3>' + recipeList[i].country + '</h3><button  onclick="passVariable(this,' + i + ')">' + recipeList[i].dish + '</button>');
 
-        var marker = new mapboxgl.Marker
+       /* var marker = new mapboxgl.Marker
+            .setLngLat([30 , 30])
+            .setLngLat([recipeList[i].long , recipeList[i].lat])
+            .setPopup(popup)
+            .addTo(map);*/
+        var marker = new mapboxgl.Marker()
             .setLngLat([recipeList[i].long, recipeList[i].lat])
             .setPopup(popup)
             .addTo(map);

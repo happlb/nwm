@@ -1,4 +1,4 @@
-﻿var recipeList = [{
+﻿var hardrecipeList = [{
     "country": "Vietnam",
     "dish": "Authentic Pho",
     "recipe": "https://www.allrecipes.com/recipe/228443/authentic-pho/",
@@ -50,7 +50,7 @@
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaGFwcGxiIiwiYSI6ImNrOWtoNnJwMzA0MnAzZW5uajZhZncza2QifQ.l0fHJIJaiwamw4T6eJ9Hfw';
 
-genMap();
+//genMap();
 makeReq();
 
 function makeReq() {
@@ -58,24 +58,26 @@ function makeReq() {
     request.open("GET", "http://localhost:3000/tasks?");//
     request.setRequestHeader("Content-Type", "application/json");
     //request.send([JSON.stringify({ "chet": "dave" })]);
-   // request.send()  
-    var params = {
+    request.send()  
+    /*var params = {
         "recipe_id": 2
-    }
-    request.send(JSON.stringify(params))
+    }*/
+    //request.send(JSON.stringify(params))
     request.onload = () => {
         //console.log(request);
         //console.log("errorzzzz");
         if (request.status == 200) {
-            console.log("idj", request.response);
             console.log(request.response);
+            var recipeList = request.response;
+            genMap(recipeList);
         } else {
             console.log("error");
         }
     }
 }
 
-function genMap() {
+function genMap(recipeList) {
+    recipeList= JSON.parse(recipeList)
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',
@@ -85,10 +87,12 @@ function genMap() {
 
 
     for (var i = 0; i < recipeList.length; i++) {
+        console.log(recipeList[i]);
+        console.log(typeof recipeList[i].long);
         var popup = new mapboxgl.Popup()
             .setHTML('<h3>' + recipeList[i].country + '</h3><button  onclick="passVariable(this,' + i + ')">' + recipeList[i].dish + '</button>');
 
-        var marker = new mapboxgl.Marker()
+        var marker = new mapboxgl.Marker
             .setLngLat([recipeList[i].long, recipeList[i].lat])
             .setPopup(popup)
             .addTo(map);

@@ -59,6 +59,7 @@ var marker = new mapboxgl.Marker()
     .addTo(map);*/
 
 //genMap();
+var recipeList = [];
 makeReq();
 
 function makeReq() {
@@ -76,16 +77,16 @@ function makeReq() {
         //console.log("errorzzzz");
         if (request.status == 200) {
             console.log(request.response);
-            var recipeList = request.response;
-            genMap(recipeList);
+            recipeList = request.response;
+            recipeList = JSON.parse(recipeList)
+            genMap();
         } else {
             console.log("error");
         }
     }
 }
 
-function genMap(recipeList) {
-    recipeList= JSON.parse(recipeList)
+function genMap() {
     var map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/mapbox/streets-v11',

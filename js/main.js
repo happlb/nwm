@@ -55,18 +55,20 @@ makeReq();
 
 function makeReq() {
     let request = new XMLHttpRequest();
-    request.open("GET", "http://localhost:3000/tasks");//
-
+    request.open("GET", "http://localhost:3000/tasks?");//
+    request.setRequestHeader("Content-Type", "application/json");
     //request.send([JSON.stringify({ "chet": "dave" })]);
-    request.send({
-        "CHEZ":"DAVE"
-    })    //request.send(2);
+   // request.send()  
+    var params = {
+        "recipe_id": 2
+    }
+    request.send(JSON.stringify(params))
     request.onload = () => {
-        console.log(request);
-        console.log("errorzzzz");
+        //console.log(request);
+        //console.log("errorzzzz");
         if (request.status == 200) {
             console.log("idj", request.response);
-            console.log(JSON.parse(request.response));
+            console.log(request.response);
         } else {
             console.log("error");
         }
